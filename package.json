@@ -1,0 +1,1 @@
+{"name":"salon-calendar-ui-checks","private":true,"version":"2.0.0","scripts":{"test":"node --test tests/frontend/*.cjs"},"devDependencies":{"linkedom":"0.18.12"}}

@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="color-scheme" content="light"><title>미용실 예약</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<main id="app">
+<section id="start" class="start"><div class="brandmark">✂</div><h1 id="shopName"></h1><p id="shopAddress"></p><button class="primary" id="newSession">새 예약 시작하기</button><button id="loginOpen">내 코드 · 관리자 접속</button></section>
+<section id="calendarApp" hidden>
+<header class="topbar"><button class="textbutton" id="bookingsToggle" aria-label="주간 예약 보기" aria-expanded="false">예약</button><div class="nav"><button class="icon" id="prev" aria-label="이전 날">‹</button><button id="dateTitle" class="textbutton" aria-label="오늘로 이동"></button><button class="icon" id="next" aria-label="다음 날">›</button></div><div class="tools"><button class="icon" id="pricesOpen" aria-label="가격표"><span class="won">₩</span></button><button class="icon" id="phoneOpen" aria-label="매장 전화번호"></button><button class="code" id="identity" aria-label="코드 표시 또는 숨기기"></button><button class="icon" id="passwordOpen" aria-label="관리자 비밀번호 변경"></button></div></header>
+<div id="weekPanel" hidden><div class="weekcaption"><button id="prevWeek" class="icon" aria-label="이전 주">‹</button><strong id="weekTitle"></strong><button id="nextWeek" class="icon" aria-label="다음 주">›</button></div><div id="weekGrid" class="weekgrid"></div></div>
+<div class="dayhead"><span id="dayLabel"></span><div class="dayheadActions"><button class="textbutton" id="myBookings">내 예약</button><button class="textbutton" id="settingsOpen" hidden>반복 관리</button><button class="textbutton muted" id="logout">나가기</button></div></div>
+<div id="timelineScroll" class="timeline-scroll"><div id="timeline" class="timeline"><div id="hours"></div><div id="tracks"></div><div id="events"></div><div id="nowLine" hidden></div><div id="selection" hidden><span class="selection-label"></span><button class="handle handle-top" data-edge="start" aria-label="시작 시간 조정"></button><button class="handle handle-bottom" data-edge="end" aria-label="종료 시간 조정"></button></div></div></div>
+<button id="add" class="fab" aria-label="새 일정">＋</button>
+</section>
+</main>
+<div id="sheet" class="sheet" hidden role="dialog" aria-label="일정 편집" aria-modal="false"><div class="sheethead"><button id="sheetToggle" class="textbutton" aria-label="입력창 펼치기 또는 접기"><span class="grip"></span><span id="sheetTitle">예약하기</span><span id="sheetTime"></span></button><button id="saveTask" class="primary compact">저장</button><button id="sheetClose" class="close" aria-label="닫기">×</button></div><div id="sheetBody" class="sheetbody"></div></div>
+<div id="modalBackdrop" class="backdrop" hidden><section id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modalhead"><h2 id="modalTitle"></h2><button id="modalClose" class="close" aria-label="닫기">×</button></div><div id="modalBody"></div></section></div>
+<div id="toasts" role="status" aria-live="polite"></div>
+<script src="app.js"></script></body></html>
