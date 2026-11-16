@@ -2,7 +2,7 @@
 Never sends a Supabase secret, login token or customer ownership hash to the iframe.
 """
 from datetime import date, timedelta
-from . import db
+from . import db, notify
 from .core import now_kst, monday
 
 MUTATIONS = {'book','save_rule','save_prices','reset_prices','delete_rule','decide','cancel',
@@ -14,7 +14,7 @@ MESSAGES = {'book':'예약을 저장했습니다.','save_rule':'시간 설정을
             'reset_prices':'이 날짜의 특별 가격을 해제했습니다.'}
 
 
-def handle_event(event, state, call=db.call):
+def handle_event(event, state, call=db.call, notify_owner=notify.send):
     """At-most-once per session/event id, including errors and uncertain network outcomes."""
     if not isinstance(event,dict) or not isinstance(event.get('id'),str):
         return
@@ -61,6 +61,11 @@ def handle_event(event, state, call=db.call):
             if result.get('state')=='pending':
                 msg='예약을 요청했습니다. 매장 승인을 기다려 주세요.'
             ack.update(ok=True,style='success',message=msg)
+            if action=='book':
+                try:  # best-effort owner alert; any failure here must not affect the saved booking
+                    notify_owner(notify.format_booking(payload,result.get('state')))
+                except Exception:
+                    pass
         else:
             raise db.AppError('지원하지 않는 작업입니다.')
     except (ValueError,TypeError):
