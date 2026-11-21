@@ -10,4 +10,10 @@
 .start p{margin-bottom:34px}
 .start button{min-height:58px;font-size:17px;border-radius:16px}
 .start button.primary{box-shadow:0 8px 20px rgba(21,101,192,.28)}
-.start #loginOpen{border-color:#c9d6e4;color:#33506b}
+/* Address pin + split login */
+#shopAddressBox{display:flex;align-items:center;justify-content:center;gap:.35em}
+#shopAddressBox .pin{width:1.05em;height:1.05em;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.start #codeOpen{color:#1565c0;font-weight:700;border-color:#b9d3f2}
+.start .adminlink{border:0;background:transparent;min-height:40px;font-size:13px;font-weight:400;color:#9aa8b6;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px}
+.start .adminlink svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.start .adminlink:hover{background:transparent;color:#526475}
