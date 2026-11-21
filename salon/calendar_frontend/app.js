@@ -97,7 +97,7 @@ function fitText(el,min,max){
 }
 function fitShopName(){
   fitText($('shopName'),18,120);            // shop name: min 18px, max 120px
-  fitText($('shopAddress'),10,40);          // address: min 10px, max 40px
+  fitText($('shopAddressBox'),10,40);       // address row (icon + text)          // address: min 10px, max 40px
 }
 window.addEventListener('resize',fitShopName);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitShopName);
