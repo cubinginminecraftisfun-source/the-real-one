@@ -83,16 +83,20 @@ window.addEventListener('message',receive);
 setInterval(()=>{if(S.data?.kind&&!S.pending&&!S.drag&&document.visibilityState==='visible')send('refresh')},10000);
 post('streamlit:componentReady',{apiVersion:1});post('streamlit:setFrameHeight',{height:820});
 // Scale the shop name so its text is exactly as wide as the buttons below it.
-function fitShopName(){
-  const h=$('shopName');
-  if(!h||!h.clientWidth)return;            // start screen hidden or not laid out yet
-  h.style.fontSize='100px';                 // measure at a known size
+// Scale a text element so its text is exactly as wide as the buttons below it.
+function fitText(el,min,max){
+  if(!el||!el.clientWidth)return;           // start screen hidden or not laid out yet
+  el.style.fontSize='100px';                // measure at a known size
   const r=document.createRange();
-  r.selectNodeContents(h);
+  r.selectNodeContents(el);
   const textWidth=r.getBoundingClientRect().width;
-  if(!textWidth)return;                     // empty name
-  const size=100*h.clientWidth/textWidth;   // size that fills the button width
-  h.style.fontSize=Math.max(18,Math.min(120,size))+'px';  // min 18px, max 120px
+  if(!textWidth)return;                     // empty text
+  const size=100*el.clientWidth/textWidth;  // size that fills the button width
+  el.style.fontSize=Math.max(min,Math.min(max,size))+'px';
+}
+function fitShopName(){
+  fitText($('shopName'),18,120);            // shop name: min 18px, max 120px
+  fitText($('shopAddress'),10,40);          // address: min 10px, max 40px
 }
 window.addEventListener('resize',fitShopName);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitShopName);
