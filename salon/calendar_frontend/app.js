@@ -101,3 +101,22 @@ function fitShopName(){
 }
 window.addEventListener('resize',fitShopName);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitShopName);
+// ---- Plus button speed-dial: 새 예약 / 가격 / 전화번호 ----
+const openNewBooking=$('add').onclick;   // the plus button's original action
+function setFab(open){
+  if(open){
+    $('fabNewText').textContent=admin()?'시간 설정':'새 예약';
+    $('fabPhone').hidden=admin()||!(S.data&&S.data.phone);
+  }
+  $('fabMenu').classList.toggle('open',open);
+  $('fabScrim').classList.toggle('open',open);
+  $('add').classList.toggle('open',open);
+  $('add').setAttribute('aria-expanded',String(open));
+}
+function closeFab(){setFab(false)}
+$('add').onclick=()=>setFab(!$('add').classList.contains('open'));
+$('fabScrim').onclick=closeFab;
+$('fabNew').onclick=()=>{closeFab();openNewBooking()};
+$('fabPrices').onclick=()=>{closeFab();$('add').focus();$('pricesOpen').click()};
+$('fabPhone').onclick=()=>{closeFab();$('add').focus();$('phoneOpen').click()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('add').classList.contains('open'))closeFab()});
